@@ -1,0 +1,12 @@
+C:\Users\eawac\source\repos\Proyecto UMG\Repository\bin\Debug\net8.0\Repository.deps.json
+C:\Users\eawac\source\repos\Proyecto UMG\Repository\bin\Debug\net8.0\Repository.dll
+C:\Users\eawac\source\repos\Proyecto UMG\Repository\bin\Debug\net8.0\Repository.pdb
+C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\Repository.AssemblyInfoInputs.cache
+C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\Repository.AssemblyInfo.cs
+C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\Repository.csproj.CoreCompileInputs.cache
+C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\Repository.dll
+C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\refint\Repository.dll
+C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\Repository.pdb
+C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\ref\Repository.dll
+C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\Repository.csproj.AssemblyReference.cache
