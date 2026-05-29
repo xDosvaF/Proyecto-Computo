@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,61 +10,75 @@ namespace Presentation.Utilidades
 {
     public static class CustomDataGridView 
     {
-        public static void ImplementarConfigurationModerno(this Guna2DataGridView datagrid, string textoEnBoton = "")
+
+        public static void ImplementarConfigurationModerno(this Guna2DataGridView datagrid, string textoEnBoton="")
         {
-            // Fondos — capas de gris muy suave
-            Color macBg = Color.FromArgb(232, 232, 237); // ventana exterior
-            Color macSurface = Color.FromArgb(245, 245, 247); // toolbar / form bg
-            Color macCard = Color.FromArgb(255, 255, 255); // tabla / cards
-            Color macHeader = Color.FromArgb(245, 245, 247); // cabecera de columnas
-            Color macBorder = Color.FromArgb(224, 224, 229); // líneas divisoras
+            datagrid.AllowUserToAddRows = false;
+            datagrid.AllowUserToDeleteRows = false;
+            datagrid.AllowUserToResizeColumns = true;
+            datagrid.AllowUserToResizeRows = false;
+            datagrid.AllowUserToOrderColumns = false;
+            datagrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            datagrid.MultiSelect = false;
+            datagrid.RowHeadersVisible = false;
+            datagrid.ReadOnly = true;
 
-            // Texto
-            Color macTextPrimary = Color.FromArgb(28, 28, 30);  // texto principal
-            Color macTextSecondary = Color.FromArgb(99, 99, 102);  // texto muted
-            Color macTextTertiary = Color.FromArgb(142, 142, 147); // placeholders / labels
+            datagrid.BackgroundColor = Color.White;
+            datagrid.BorderStyle = BorderStyle.None;
+            datagrid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            datagrid.GridColor = Color.FromArgb(238, 239, 242);
+            datagrid.ThemeStyle.BackColor = Color.White;
+            datagrid.ThemeStyle.GridColor = Color.FromArgb(238, 239, 242);
 
-            // Acento Apple Blue
-            Color macBlue = Color.FromArgb(0, 113, 227);
-            Color macBlueLight = Color.FromArgb(232, 240, 253); // fila seleccionada
+            datagrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            datagrid.ColumnHeadersHeight = 40;
+            datagrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 
-            // Estados
-            Color macGreen = Color.FromArgb(52, 199, 89);
-            Color macOrange = Color.FromArgb(255, 159, 10);
-
-            datagrid.BackgroundColor = macCard;
-            datagrid.GridColor = Color.FromArgb(240, 240, 242);
-            datagrid.ThemeStyle.HeaderStyle.BackColor = macHeader;
-            datagrid.ThemeStyle.HeaderStyle.ForeColor = macTextTertiary;
-            datagrid.ThemeStyle.HeaderStyle.Font = new Font("SF Pro Text", 9F);
-            datagrid.ThemeStyle.RowsStyle.Height = 38;
-            datagrid.ThemeStyle.RowsStyle.BackColor = macCard;
-            datagrid.ThemeStyle.RowsStyle.ForeColor = macTextPrimary;
-            datagrid.ThemeStyle.RowsStyle.SelectionBackColor = macBlueLight;
-            datagrid.ThemeStyle.RowsStyle.SelectionForeColor = macTextPrimary;
-            datagrid.ThemeStyle.RowsStyle.Font = new Font("SF Pro Text", 10F);
-
-            if (textoEnBoton != "")
+            datagrid.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
             {
-                var btnEditarColumn = new DataGridViewButtonColumn();
-                btnEditarColumn.Text = textoEnBoton;
-                btnEditarColumn.Name = "ColumnaAccion";
-                btnEditarColumn.HeaderText = "";
-                btnEditarColumn.UseColumnTextForButtonValue = true;
-                btnEditarColumn.Width = 50;
-                btnEditarColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                BackColor = Color.FromArgb(246, 247, 251),
+                ForeColor = Color.FromArgb(140, 144, 156),
+                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                Alignment = DataGridViewContentAlignment.MiddleLeft,
+                Padding = new Padding(12, 0, 0, 0)
+            };
 
-                btnEditarColumn.DefaultCellStyle.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold);
+            datagrid.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.White,
+                ForeColor = Color.FromArgb(18, 18, 18),
+                Font = new Font("Segoe UI", 9F, FontStyle.Regular),
+                SelectionBackColor = Color.FromArgb(240, 242, 245),
+                SelectionForeColor = Color.FromArgb(18, 18, 18),
+                Alignment = DataGridViewContentAlignment.MiddleLeft,
+                Padding = new Padding(12, 0, 0, 0)
+            };
 
-                // Botón de acción estilo macOS
-                btnEditarColumn.DefaultCellStyle.BackColor = macCard;
-                btnEditarColumn.DefaultCellStyle.ForeColor = macTextPrimary;
-                btnEditarColumn.DefaultCellStyle.SelectionBackColor = macBlueLight;
-                btnEditarColumn.FlatStyle = FlatStyle.Flat;
+            datagrid.RowTemplate.Height = 45;
+            datagrid.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.White };
 
+            if (!string.IsNullOrEmpty(textoEnBoton))
+            {
+                var btnEditarColumn = new DataGridViewButtonColumn
+                {
+                    Text = textoEnBoton,
+                    Name = "ColumnaAccion",
+                    HeaderText = "Acción",
+                    UseColumnTextForButtonValue = true,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells,
+                    FlatStyle = FlatStyle.Flat
+                };
 
-                btnEditarColumn.FlatStyle = FlatStyle.Flat;
-
+                btnEditarColumn.DefaultCellStyle = new DataGridViewCellStyle
+                {
+                    BackColor = Color.FromArgb(240, 242, 245),
+                    ForeColor = Color.FromArgb(18, 18, 18),
+                    SelectionBackColor = Color.FromArgb(220, 224, 230),
+                    SelectionForeColor = Color.FromArgb(18, 18, 18),
+                    Font = new Font("Segoe UI", 8.5F, FontStyle.Regular),
+                    Alignment = DataGridViewContentAlignment.MiddleCenter,
+                    Padding = new Padding(5, 2, 5, 2)
+                };
 
                 datagrid.Columns.Add(btnEditarColumn);
             }

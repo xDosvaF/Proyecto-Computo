@@ -29,6 +29,7 @@ namespace Presentation.Formularios
         private async void frmUsuario_Load(object sender, EventArgs e)
         {
             dgvUsuario.ImplementarConfigurationModerno("🖋️");
+            dgvUsuario.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             await MostrarUsuario();
             var listaRol = await _rolServices.Lista();
             var items = listaRol.Select(item => new OpcionCombo { Texto = item.nombre, Valor = item.idRol }).ToArray();
@@ -71,11 +72,16 @@ namespace Presentation.Formularios
                 nombre_completo = item.nombre_completo,
                 correo = item.correo,
                 sexo = item.sexo,
+                sexo2 = item.sexo == 1 ? "Femeino" : "Masculino",
                 activo = item.activo
             }).ToList();
             dgvUsuario.DataSource = listaVM;
             dgvUsuario.Columns["idUsuario"].Visible = false;
             dgvUsuario.Columns["idRol"].Visible = false;
+            dgvUsuario.Columns["sexo"].Visible = false;
+            dgvUsuario.Columns["nombre_completo"].HeaderText = "Nombre";
+            dgvUsuario.Columns["nombre_rol"].HeaderText = "Rol";
+            dgvUsuario.Columns["sexo2"].HeaderText = "Sexo";
         }
 
         private void btnCrearVer_Click(object sender, EventArgs e)
@@ -121,6 +127,7 @@ namespace Presentation.Formularios
             }
             else
             {
+                await MostrarUsuario();
                 MostrarTab(tabVer.Name);
             }
         }
@@ -160,10 +167,10 @@ namespace Presentation.Formularios
                 return;
             }
 
-            var estudianteSeleccionado = (UsuarioVM)dgvUsuario.CurrentRow.DataBoundItem;
+            var usuarioSeleccionado = (UsuarioVM)dgvUsuario.CurrentRow.DataBoundItem;
             var objeto = new Usuario
             {
-                idUsuario = estudianteSeleccionado.idUsuario,
+                idUsuario = usuarioSeleccionado.idUsuario,
                 RefRol = new Rol { idRol = ((OpcionCombo)cbbRolEditar.SelectedItem!).Valor },
                 nombre_completo = txtNombreCompletoEditar.Text.Trim(),
                 correo = txtCorreoEditar.Text.Trim(),
@@ -186,6 +193,11 @@ namespace Presentation.Formularios
         private void btnCancelarEditar_Click(object sender, EventArgs e)
         {
             MostrarTab(tabVer.Name);
+        }
+
+        private void cbActivo_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

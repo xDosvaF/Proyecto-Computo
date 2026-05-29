@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "QIgkJNIgTRI=",
+  "dgSpecHash": "3viubqCicqs=",
   "success": true,
   "projectFilePath": "C:\\Users\\eawac\\source\\repos\\Proyecto UMG\\Presentation\\Presentation.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\eawac\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
     "C:\\Users\\eawac\\.nuget\\packages\\guna.ui2.winforms\\2.0.4.7\\guna.ui2.winforms.2.0.4.7.nupkg.sha512",
+    "C:\\Users\\eawac\\.nuget\\packages\\itextsharp\\5.5.13.5\\itextsharp.5.5.13.5.nupkg.sha512",
     "C:\\Users\\eawac\\.nuget\\packages\\microsoft.bcl.cryptography\\8.0.0\\microsoft.bcl.cryptography.8.0.0.nupkg.sha512",
     "C:\\Users\\eawac\\.nuget\\packages\\microsoft.data.sqlclient\\7.0.1\\microsoft.data.sqlclient.7.0.1.nupkg.sha512",
     "C:\\Users\\eawac\\.nuget\\packages\\microsoft.data.sqlclient.extensions.abstractions\\1.0.0\\microsoft.data.sqlclient.extensions.abstractions.1.0.0.nupkg.sha512",
@@ -58,5 +60,18 @@
     "C:\\Users\\eawac\\.nuget\\packages\\system.text.encodings.web\\10.0.8\\system.text.encodings.web.10.0.8.nupkg.sha512",
     "C:\\Users\\eawac\\.nuget\\packages\\system.text.json\\10.0.8\\system.text.json.10.0.8.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "El paquete \"iTextSharp 5.5.13.5\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\" en lugar de la plataforma de destino del proyecto \"net8.0-windows7.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "projectPath": "C:\\Users\\eawac\\source\\repos\\Proyecto UMG\\Presentation\\Presentation.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\eawac\\source\\repos\\Proyecto UMG\\Presentation\\Presentation.csproj",
+      "libraryId": "iTextSharp",
+      "targetGraphs": [
+        "net8.0-windows7.0"
+      ]
+    }
+  ]
 }

@@ -21,5 +21,10 @@ namespace Presentation.Formularios
         {
 
         }
+
+        private void btnCrearVer_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

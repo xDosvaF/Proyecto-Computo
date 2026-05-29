@@ -35,6 +35,7 @@ namespace Presentation
                 services.AddTransient<Layout>();
                 services.AddTransient<frmUsuario>();
                 services.AddTransient<frmProducto>();
+                services.AddTransient<frmVenta>();
             });
 
     }

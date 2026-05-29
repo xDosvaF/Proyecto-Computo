@@ -31,33 +31,67 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            msMenu = new MenuStrip();
+            mnUsuario = new ToolStripMenuItem();
+            mnProducto = new ToolStripMenuItem();
+            mnVenta = new ToolStripMenuItem();
             btnClose = new Guna.UI2.WinForms.Guna2CircleButton();
             panelControl = new FlowLayoutPanel();
             btnMaximized = new Guna.UI2.WinForms.Guna2CircleButton();
             btnMinimized = new Guna.UI2.WinForms.Guna2CircleButton();
             panelMain = new Panel();
-            msMenu = new MenuStrip();
-            mnUsuario = new ToolStripMenuItem();
-            mnProducto = new ToolStripMenuItem();
-            mnVenta = new ToolStripMenuItem();
-            guna2CustomGradientPanel1.SuspendLayout();
-            panelControl.SuspendLayout();
+            pnControl = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            guna2CustomGradientPanel3 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            pnLogoMariano = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            pctUMG = new PictureBox();
             msMenu.SuspendLayout();
+            panelControl.SuspendLayout();
+            pnControl.SuspendLayout();
+            guna2CustomGradientPanel3.SuspendLayout();
+            pnLogoMariano.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pctUMG).BeginInit();
             SuspendLayout();
             // 
-            // guna2CustomGradientPanel1
+            // msMenu
             // 
-            guna2CustomGradientPanel1.Controls.Add(msMenu);
-            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges1;
-            guna2CustomGradientPanel1.Dock = DockStyle.Left;
-            guna2CustomGradientPanel1.Location = new Point(0, 0);
-            guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2CustomGradientPanel1.Size = new Size(150, 500);
-            guna2CustomGradientPanel1.TabIndex = 0;
+            msMenu.BackColor = Color.White;
+            msMenu.Items.AddRange(new ToolStripItem[] { mnUsuario, mnProducto, mnVenta });
+            msMenu.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
+            msMenu.Location = new Point(0, 0);
+            msMenu.Name = "msMenu";
+            msMenu.Size = new Size(150, 156);
+            msMenu.TabIndex = 0;
+            msMenu.Text = "menuStrip1";
+            // 
+            // mnUsuario
+            // 
+            mnUsuario.AutoSize = false;
+            mnUsuario.Name = "mnUsuario";
+            mnUsuario.Size = new Size(143, 50);
+            mnUsuario.Text = "Usuario";
+            mnUsuario.Click += mnUsuario_Click;
+            // 
+            // mnProducto
+            // 
+            mnProducto.AutoSize = false;
+            mnProducto.Name = "mnProducto";
+            mnProducto.Size = new Size(143, 50);
+            mnProducto.Text = "Producto";
+            mnProducto.Click += mnProducto_Click;
+            // 
+            // mnVenta
+            // 
+            mnVenta.AutoSize = false;
+            mnVenta.Name = "mnVenta";
+            mnVenta.Size = new Size(143, 50);
+            mnVenta.Text = "Venta";
+            mnVenta.Click += mnVenta_Click;
             // 
             // btnClose
             // 
@@ -70,7 +104,7 @@
             btnClose.ForeColor = Color.White;
             btnClose.Location = new Point(561, 11);
             btnClose.Name = "btnClose";
-            btnClose.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            btnClose.ShadowDecoration.CustomizableEdges = customizableEdges1;
             btnClose.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btnClose.Size = new Size(20, 20);
             btnClose.TabIndex = 0;
@@ -105,7 +139,7 @@
             btnMaximized.ForeColor = Color.White;
             btnMaximized.Location = new Point(535, 11);
             btnMaximized.Name = "btnMaximized";
-            btnMaximized.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnMaximized.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnMaximized.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btnMaximized.Size = new Size(20, 20);
             btnMaximized.TabIndex = 1;
@@ -123,7 +157,7 @@
             btnMinimized.ForeColor = Color.White;
             btnMinimized.Location = new Point(509, 11);
             btnMinimized.Name = "btnMinimized";
-            btnMinimized.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            btnMinimized.ShadowDecoration.CustomizableEdges = customizableEdges3;
             btnMinimized.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btnMinimized.Size = new Size(20, 20);
             btnMinimized.TabIndex = 2;
@@ -138,37 +172,52 @@
             panelMain.Size = new Size(600, 458);
             panelMain.TabIndex = 3;
             // 
-            // msMenu
+            // pnControl
             // 
-            msMenu.BackColor = Color.White;
-            msMenu.Items.AddRange(new ToolStripItem[] { mnUsuario, mnProducto, mnVenta });
-            msMenu.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
-            msMenu.Location = new Point(0, 0);
-            msMenu.Name = "msMenu";
-            msMenu.Size = new Size(150, 156);
-            msMenu.TabIndex = 0;
-            msMenu.Text = "menuStrip1";
+            pnControl.Controls.Add(guna2CustomGradientPanel3);
+            pnControl.Controls.Add(pnLogoMariano);
+            pnControl.CustomizableEdges = customizableEdges8;
+            pnControl.Dock = DockStyle.Left;
+            pnControl.Location = new Point(0, 0);
+            pnControl.Name = "pnControl";
+            pnControl.ShadowDecoration.CustomizableEdges = customizableEdges9;
+            pnControl.Size = new Size(150, 500);
+            pnControl.TabIndex = 0;
             // 
-            // mnUsuario
+            // guna2CustomGradientPanel3
             // 
-            mnUsuario.AutoSize = false;
-            mnUsuario.Name = "mnUsuario";
-            mnUsuario.Size = new Size(143, 50);
-            mnUsuario.Text = "Usuario";
+            guna2CustomGradientPanel3.Controls.Add(msMenu);
+            guna2CustomGradientPanel3.CustomizableEdges = customizableEdges4;
+            guna2CustomGradientPanel3.Dock = DockStyle.Fill;
+            guna2CustomGradientPanel3.Location = new Point(0, 137);
+            guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
+            guna2CustomGradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            guna2CustomGradientPanel3.Size = new Size(150, 363);
+            guna2CustomGradientPanel3.TabIndex = 1;
             // 
-            // mnProducto
+            // pnLogoMariano
             // 
-            mnProducto.AutoSize = false;
-            mnProducto.Name = "mnProducto";
-            mnProducto.Size = new Size(143, 50);
-            mnProducto.Text = "Producto";
+            pnLogoMariano.Controls.Add(pctUMG);
+            pnLogoMariano.CustomizableEdges = customizableEdges6;
+            pnLogoMariano.Dock = DockStyle.Top;
+            pnLogoMariano.Location = new Point(0, 0);
+            pnLogoMariano.Name = "pnLogoMariano";
+            pnLogoMariano.Padding = new Padding(0, 8, 0, 8);
+            pnLogoMariano.ShadowDecoration.CustomizableEdges = customizableEdges7;
+            pnLogoMariano.Size = new Size(150, 137);
+            pnLogoMariano.TabIndex = 0;
             // 
-            // mnVenta
+            // pctUMG
             // 
-            mnVenta.AutoSize = false;
-            mnVenta.Name = "mnVenta";
-            mnVenta.Size = new Size(143, 50);
-            mnVenta.Text = "Venta";
+            pctUMG.BackColor = Color.White;
+            pctUMG.Dock = DockStyle.Fill;
+            pctUMG.Image = Properties.Resources.Escudo_de_la_universidad_Mariano_Gálvez_Guatemala_svg;
+            pctUMG.Location = new Point(0, 8);
+            pctUMG.Name = "pctUMG";
+            pctUMG.Size = new Size(150, 121);
+            pctUMG.SizeMode = PictureBoxSizeMode.Zoom;
+            pctUMG.TabIndex = 0;
+            pctUMG.TabStop = false;
             // 
             // Layout
             // 
@@ -178,25 +227,26 @@
             ClientSize = new Size(750, 500);
             Controls.Add(panelMain);
             Controls.Add(panelControl);
-            Controls.Add(guna2CustomGradientPanel1);
+            Controls.Add(pnControl);
             FormBorderStyle = FormBorderStyle.None;
             MainMenuStrip = msMenu;
             Name = "Layout";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Layout";
             Load += Layout_Load;
-            guna2CustomGradientPanel1.ResumeLayout(false);
-            guna2CustomGradientPanel1.PerformLayout();
-            panelControl.ResumeLayout(false);
             msMenu.ResumeLayout(false);
             msMenu.PerformLayout();
+            panelControl.ResumeLayout(false);
+            pnControl.ResumeLayout(false);
+            guna2CustomGradientPanel3.ResumeLayout(false);
+            guna2CustomGradientPanel3.PerformLayout();
+            pnLogoMariano.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pctUMG).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private Guna.UI2.WinForms.Guna2CircleButton btnClose;
         private FlowLayoutPanel panelControl;
         private Guna.UI2.WinForms.Guna2CircleButton btnMaximized;
@@ -206,5 +256,9 @@
         private ToolStripMenuItem mnUsuario;
         private ToolStripMenuItem mnProducto;
         private ToolStripMenuItem mnVenta;
+        private Guna.UI2.WinForms.Guna2CustomGradientPanel pnControl;
+        private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel3;
+        private Guna.UI2.WinForms.Guna2CustomGradientPanel pnLogoMariano;
+        private PictureBox pctUMG;
     }
 }

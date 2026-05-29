@@ -10,3 +10,4 @@ C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\refint\Repo
 C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\Repository.pdb
 C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\ref\Repository.dll
 C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\Repository.csproj.AssemblyReference.cache
+C:\Users\eawac\source\repos\Proyecto UMG\Repository\obj\Debug\net8.0\Repository.sourcelink.json

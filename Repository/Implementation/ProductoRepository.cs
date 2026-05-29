@@ -103,7 +103,7 @@ namespace Repository.Implementation
                             nombre = dr["nombre"].ToString()!,
                             descripcion = dr["descripcion"].ToString()!,
                             precio = Convert.ToInt32(dr["precio"]),
-                            activo = Convert.ToInt32(dr["activo"])
+                            activo = Convert.ToBoolean(dr["activo"])
                         });
                     }
                 }

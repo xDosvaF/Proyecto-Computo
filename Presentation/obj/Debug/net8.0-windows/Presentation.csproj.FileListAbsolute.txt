@@ -98,3 +98,7 @@ C:\Users\eawac\source\repos\Proyecto UMG\Presentation\obj\Debug\net8.0-windows\P
 C:\Users\eawac\source\repos\Proyecto UMG\Presentation\obj\Debug\net8.0-windows\Presentation.Formularios.Layout.resources
 C:\Users\eawac\source\repos\Proyecto UMG\Presentation\obj\Debug\net8.0-windows\Presentation.Formularios.frmProducto.resources
 C:\Users\eawac\source\repos\Proyecto UMG\Presentation\obj\Debug\net8.0-windows\Presentation.Formularios.frmVenta.resources
+C:\Users\eawac\source\repos\Proyecto UMG\Presentation\obj\Debug\net8.0-windows\Presentation.sourcelink.json
+C:\Users\eawac\source\repos\Proyecto UMG\Presentation\obj\Debug\net8.0-windows\Presentation.Properties.Resources.resources
+C:\Users\eawac\source\repos\Proyecto UMG\Presentation\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
+C:\Users\eawac\source\repos\Proyecto UMG\Presentation\bin\Debug\net8.0-windows\itextsharp.dll

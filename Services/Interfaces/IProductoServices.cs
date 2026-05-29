@@ -9,7 +9,7 @@ namespace Services.Interfaces
 {
     public interface IProductoServices
     {
-        Task<List<Producto>> Lista(string buscar);
+        Task<List<Producto>> Lista(string buscar="");
 
         Task<string> Crear(Producto objeto);
 
