@@ -21,5 +21,10 @@ namespace Services.Implementation
         {
             return await _repository.Crear(objeto);
         }
+
+        public async Task<List<DetalleVenta>> Lista()
+        {
+            return await _repository.Lista();
+        }
     }
 }

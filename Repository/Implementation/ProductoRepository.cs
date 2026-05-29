@@ -31,6 +31,7 @@ namespace Repository.Implementation
                 cmd.Parameters.AddWithValue("@nombre", objeto.nombre);
                 cmd.Parameters.AddWithValue("@descripcion", objeto.descripcion);
                 cmd.Parameters.AddWithValue("@precio", objeto.precio);
+                cmd.Parameters.AddWithValue("@stock", objeto.stock);
                 cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -60,6 +61,7 @@ namespace Repository.Implementation
                 cmd.Parameters.AddWithValue("@nombre", objeto.nombre);
                 cmd.Parameters.AddWithValue("@descripcion", objeto.descripcion);
                 cmd.Parameters.AddWithValue("@precio", objeto.precio);
+                cmd.Parameters.AddWithValue("@stock", objeto.stock);
                 cmd.Parameters.AddWithValue("@activo", objeto.activo);
                 cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -103,12 +105,47 @@ namespace Repository.Implementation
                             nombre = dr["nombre"].ToString()!,
                             descripcion = dr["descripcion"].ToString()!,
                             precio = Convert.ToInt32(dr["precio"]),
+                            stock = Convert.ToInt32(dr["stock"]),
                             activo = Convert.ToBoolean(dr["activo"])
                         });
                     }
                 }
             }
             return lista;
+        }
+
+        public async Task<Producto> Obtener(string nombre)
+        {
+            Producto objeto = new Producto();
+
+            using(var con = _conexion.ObtenerSQLConexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("sp_obtenerProducto", con);
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using(var dr = await cmd.ExecuteReaderAsync())
+                {
+                    if(await dr.ReadAsync())
+                    {
+                        objeto = new Producto(){
+                            idProducto = Convert.ToInt32(dr["idProducto"]),
+                            RefCategoria = new Categoria
+                            {
+                                nombre = dr["nombre_categoria"].ToString()!
+                            },
+                            nombre = dr["nombre"].ToString()!,
+                            descripcion = dr["descripcion"].ToString()!,
+                            precio = Convert.ToInt32(dr["precio"]),
+                            stock = Convert.ToInt32(dr["stock"]),
+                            activo = Convert.ToBoolean(dr["activo"])
+                        };
+
+                    }
+                }
+            }
+            return objeto;
         }
     }
 }

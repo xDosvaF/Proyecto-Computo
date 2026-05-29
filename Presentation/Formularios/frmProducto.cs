@@ -1,4 +1,6 @@
-﻿using Presentation.Utilidades;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Presentation.Utilidades;
 using Presentation.Utilidades.Objeto;
 using Presentation.ViewModels;
 using Repository.Entities;
@@ -39,6 +41,7 @@ namespace Presentation.Formularios
                 nombre = item.nombre,
                 descripcion = item.descripcion,
                 precio = item.precio,
+                stock = item.stock,
                 activo = item.activo,
 
             }).ToList();
@@ -101,6 +104,7 @@ namespace Presentation.Formularios
                 RefCategoria = new Categoria { idCategoria = ((OpcionCombo)cbbCategoriaCrear.SelectedItem!).Valor },
                 nombre = txtNombreCrear.Text.Trim(),
                 descripcion = txtDescripcionCrear.Text.Trim(),
+                stock = Convert.ToInt32(numStockCrear.Value),
                 precio = numPrecioCrear.Value
             };
             var respuesta = await _productoServices.Crear(objeto);
@@ -125,6 +129,7 @@ namespace Presentation.Formularios
                 txtNombreEditar.Text = usuarioSeleccionado.nombre.ToString();
                 txtDescripcionEditar.Text = usuarioSeleccionado.descripcion.ToString();
                 numPrecioEditar.Value = usuarioSeleccionado.precio;
+                numStockEditar.Value = usuarioSeleccionado.stock;
                 cbbCategoriaEditar.EstablecerValor(usuarioSeleccionado.idCategoria);
 
                 MostrarTab(tabEditar.Name);
@@ -148,6 +153,7 @@ namespace Presentation.Formularios
                 nombre = txtNombreEditar.Text.Trim(),
                 descripcion = txtDescripcionEditar.Text.Trim(),
                 precio = numPrecioEditar.Value,
+                stock = Convert.ToInt32(numStockEditar.Value),
                 activo = cbActivo.Checked
             };
             var respuesta = await _productoServices.Editar(objeto);
@@ -171,8 +177,6 @@ namespace Presentation.Formularios
         private async void guna2Button3_Click(object sender, EventArgs e)
         {
             var lista = await _productoServices.Lista();
-
-            // 2. Mapearlos a la lista de ViewModels (tal cual lo haces en tu método MostrarProducto)
             var listaVM = lista.Select(item => new ProductoVM
             {
                 nombre_categoria = item.RefCategoria.nombre,
@@ -181,24 +185,19 @@ namespace Presentation.Formularios
                 precio = item.precio
             }).ToList();
 
-            if (listaVM.Count == 0)
+            string titulo = "Reporte General de Productos";
+            string[] cabeceras = { "Categoría", "Producto", "Descripción", "Precio" };
+            float[] anchos = { 25f, 25f, 35f, 15f };
+
+            ReporteGenerator.GenerarReportePdf(listaVM, titulo, cabeceras, anchos, (item, tabla, fuente) =>
             {
-                MessageBox.Show("No hay datos para exportar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                tabla.AddCell(new PdfPCell(new Phrase(item.nombre_categoria, fuente)));
+                tabla.AddCell(new PdfPCell(new Phrase(item.nombre, fuente)));
+                tabla.AddCell(new PdfPCell(new Phrase(item.descripcion, fuente)));
 
-            // 3. Preguntar dónde guardar el archivo
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Archivos PDF (*.pdf)|*.pdf";
-            sfd.FileName = "Reporte_de_Productos.pdf";
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                // 4. Llamar al método simplificado
-                ReporteGenerator.GenerarPdfProductos(listaVM, sfd.FileName);
-
-                MessageBox.Show("¡Reporte PDF creado con éxito!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+                PdfPCell cPrecio = new PdfPCell(new Phrase($"Q {item.precio:N2}", fuente)) { HorizontalAlignment = Element.ALIGN_RIGHT };
+                tabla.AddCell(cPrecio);
+            });
         }
     }
 }

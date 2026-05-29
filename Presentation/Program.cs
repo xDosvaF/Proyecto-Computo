@@ -36,6 +36,7 @@ namespace Presentation
                 services.AddTransient<frmUsuario>();
                 services.AddTransient<frmProducto>();
                 services.AddTransient<frmVenta>();
+                services.AddTransient<frmBuscarProducto>();
             });
 
     }

@@ -11,5 +11,7 @@ namespace Repository.Interfaces
     {
         Task<string> Crear(DetalleVenta objeto);
 
+        Task<List<DetalleVenta>> Lista();
+
     }
 }

@@ -14,5 +14,6 @@ namespace Repository.Interfaces
         Task<string> Crear(Producto objeto);
 
         Task<string> Editar(Producto objeto);
+        Task<Producto> Obtener(string nombre);
     }
 }

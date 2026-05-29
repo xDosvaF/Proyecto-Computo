@@ -10,5 +10,6 @@ namespace Services.Interfaces
     public interface IDetalleVentaServices
     {
         Task<string> Crear(DetalleVenta objeto);
+        Task<List<DetalleVenta>> Lista();
     }
 }

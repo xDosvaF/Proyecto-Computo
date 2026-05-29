@@ -16,6 +16,7 @@ namespace Services
             services.AddTransient<ICategoriaServices, CategoriaServices>();
             services.AddTransient<IProductoServices, ProductoServices>();
             services.AddTransient<IDetalleVentaServices, DetalleVentaServices>();
+            services.AddTransient<IVentaServices, VentaServices>();
         }
     }
 }

@@ -30,5 +30,10 @@ namespace Services.Implementation
         {
             return await _productoRepository.Lista(buscar);
         }
+
+        public async Task<Producto> Obtener(string nombre)
+        {
+            return await _productoRepository.Obtener(nombre);
+        }
     }
 }

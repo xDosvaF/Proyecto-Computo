@@ -17,6 +17,7 @@ namespace Repository
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
             services.AddTransient<IProductoRepository , ProductoRepository>();
             services.AddTransient<IDetalleVentaRepository , DetalleVentaRepository>();
+            services.AddTransient<IVentaRepository , VentaRepository>();
         }
     }
 }

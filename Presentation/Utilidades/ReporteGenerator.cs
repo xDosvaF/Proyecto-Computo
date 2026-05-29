@@ -1,62 +1,75 @@
-﻿using iTextSharp.text;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
-using Presentation.ViewModels;
-using System.Reflection;
-
 
 namespace Presentation.Utilidades
 {
     public static class ReporteGenerator
     {
-        public static void GenerarPdfProductos(List<ProductoVM> listaProductos, string rutaArchivo)
+        // El método recibe: la lista de datos, el título, las cabeceras de texto, los anchos de columna y cómo pintar la fila
+        public static void GenerarReportePdf<T>(
+            List<T> listaDatos,
+            string tituloReporte,
+            string[] cabeceras,
+            float[] anchosColumnas,
+            Action<T, PdfPTable, iTextSharp.text.Font> mapearFila)
         {
-            // 1. Crear el documento base
             Document doc = new Document(PageSize.A4, 20f, 20f, 20f, 20f);
 
             try
             {
-                PdfWriter.GetInstance(doc, new FileStream(rutaArchivo, FileMode.Create));
+                // Configurar el diálogo para guardar
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "Archivos PDF (*.pdf)|*.pdf";
+                sfd.FileName = $"{tituloReporte.Replace(" ", "_")}_{DateTime.Now:yyyyMMdd}.pdf";
+
+                if (sfd.ShowDialog() != DialogResult.OK) return;
+
+                PdfWriter.GetInstance(doc, new FileStream(sfd.FileName, FileMode.Create));
                 doc.Open();
 
-                // 2. Definir fuentes explícitas (Evita el error de referencia ambigua)
+                // Fuentes explícitas controladas
                 iTextSharp.text.Font fuenteTitulo = FontFactory.GetFont("Helvetica-Bold", 14f, BaseColor.BLACK);
-                iTextSharp.text.Font fuenteCuerpo = FontFactory.GetFont("Helvetica", 9f, BaseColor.BLACK);
+                iTextSharp.text.Font fuenteSub = FontFactory.GetFont("Helvetica", 9f, BaseColor.DARK_GRAY);
                 iTextSharp.text.Font fuenteCabecera = FontFactory.GetFont("Helvetica-Bold", 9f, BaseColor.WHITE);
+                iTextSharp.text.Font fuenteCuerpo = FontFactory.GetFont("Helvetica", 9f, BaseColor.BLACK);
 
-                // 3. Agregar el título del reporte
-                Paragraph titulo = new Paragraph("REPORTE GENERAL DE PRODUCTOS", fuenteTitulo);
+                // Encabezado institucional
+                Paragraph institucional = new Paragraph("UNIVERSIDAD MARIANO GÁLVEZ DE GUATEMALA", fuenteSub);
+                institucional.Alignment = Element.ALIGN_CENTER;
+                doc.Add(institucional);
+
+                Paragraph titulo = new Paragraph(tituloReporte.ToUpper(), fuenteTitulo);
                 titulo.Alignment = Element.ALIGN_CENTER;
                 titulo.SpacingAfter = 15f;
                 doc.Add(titulo);
 
-                // 4. Crear la tabla con exactamente 4 columnas (las que vas a mostrar)
-                PdfPTable tabla = new PdfPTable(4);
+                // Inicializar Tabla dinámicamente según los parámetros enviados
+                PdfPTable tabla = new PdfPTable(cabeceras.Length);
                 tabla.WidthPercentage = 100;
+                if (anchosColumnas != null) tabla.SetWidths(anchosColumnas);
 
-                // Definir el ancho proporcional de cada columna: Categoría (25%), Nombre (25%), Descripción (35%), Precio (15%)
-                tabla.SetWidths(new float[] { 25f, 25f, 35f, 15f });
-
-                // 5. Escribir las cabeceras manualmente
-                tabla.AddCell(new PdfPCell(new Phrase("Categoría", fuenteCabecera)) { BackgroundColor = BaseColor.DARK_GRAY, HorizontalAlignment = Element.ALIGN_CENTER });
-                tabla.AddCell(new PdfPCell(new Phrase("Producto", fuenteCabecera)) { BackgroundColor = BaseColor.DARK_GRAY, HorizontalAlignment = Element.ALIGN_CENTER });
-                tabla.AddCell(new PdfPCell(new Phrase("Descripción", fuenteCabecera)) { BackgroundColor = BaseColor.DARK_GRAY, HorizontalAlignment = Element.ALIGN_CENTER });
-                tabla.AddCell(new PdfPCell(new Phrase("Precio", fuenteCabecera)) { BackgroundColor = BaseColor.DARK_GRAY, HorizontalAlignment = Element.ALIGN_CENTER });
-
-                // 6. Recorrer la lista de productos e insertar fila por fila
-                foreach (var prod in listaProductos)
+                // Imprimir Cabeceras
+                foreach (string cabecera in cabeceras)
                 {
-                    tabla.AddCell(new PdfPCell(new Phrase(prod.nombre_categoria, fuenteCuerpo)));
-                    tabla.AddCell(new PdfPCell(new Phrase(prod.nombre, fuenteCuerpo)));
-                    tabla.AddCell(new PdfPCell(new Phrase(prod.descripcion, fuenteCuerpo)));
-
-                    // Alinear el precio a la derecha
-                    PdfPCell celdaPrecio = new PdfPCell(new Phrase($"Q {prod.precio:N2}", fuenteCuerpo));
-                    celdaPrecio.HorizontalAlignment = Element.ALIGN_RIGHT;
-                    tabla.AddCell(celdaPrecio);
+                    PdfPCell cell = new PdfPCell(new Phrase(cabecera, fuenteCabecera));
+                    cell.BackgroundColor = new BaseColor(41, 128, 185); // Azul académico elegante
+                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cell.Padding = 5f;
+                    tabla.AddCell(cell);
                 }
 
-                // 7. Guardar la tabla en el documento
+                // Imprimir el contenido delegando la responsabilidad al formulario
+                foreach (T item in listaDatos)
+                {
+                    mapearFila(item, tabla, fuenteCuerpo);
+                }
+
                 doc.Add(tabla);
+                MessageBox.Show("¡Reporte PDF creado con éxito!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -64,7 +77,6 @@ namespace Presentation.Utilidades
             }
             finally
             {
-                // Cerrar siempre el documento
                 doc.Close();
             }
         }

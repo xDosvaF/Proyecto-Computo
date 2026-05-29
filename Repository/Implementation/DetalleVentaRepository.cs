@@ -46,5 +46,39 @@ namespace Repository.Implementation
             }
             return respuesta;
         }
+
+        public async Task<List<DetalleVenta>> Lista()
+        {
+            List<DetalleVenta> lista = new List<DetalleVenta>();
+            using (var con = _conexion.ObtenerSQLConexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("sp_listaDetalleVenta", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    while (await dr.ReadAsync())
+                    {
+                        lista.Add(new DetalleVenta()
+                        {
+                            idDetalleVenta = Convert.ToInt32(dr["idDetalleVenta"]),
+                            RefVenta = new Venta
+                            {
+                                nombre_cliente = dr["nombre_cliente"].ToString()!
+                            },
+                            RefProducto = new Producto
+                            {
+                                nombre = dr["nombre"].ToString()!,
+                                precio = Convert.ToDecimal(dr["precio"])
+                            },
+                            cantidad = Convert.ToInt32(dr["cantidad"]),
+                            precio_total = Convert.ToDecimal(dr["precio_total"])
+                        });
+                    }
+                }
+            }
+            return lista;
+        }
     }
 }
